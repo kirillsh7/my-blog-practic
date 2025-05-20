@@ -7,9 +7,7 @@ const Div = styled.div`
 function App() {
   return (
     <div >
-      <Div> <i className="fa fa-address-book" ></i></Div>
-      <Div>456</Div>
-
+      <Div>hello</Div>
     </div>
   )
 }
