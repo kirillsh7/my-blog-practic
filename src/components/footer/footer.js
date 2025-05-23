@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-function Footer() {
+function FooterContainer() {
 	return (
 		<div>
 			<p>Footer</p>
@@ -8,4 +8,6 @@ function Footer() {
 	)
 }
 
-export default Footer
+export const Footer = styled(FooterContainer)`
+
+`
