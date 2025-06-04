@@ -1,10 +1,10 @@
-import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { Icon } from '../../../../components';
+import { Link, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import { Icon } from '../../../../components'
 const RightAligned = styled.div`
   display: flex;
   justify-content: flex-end;
-`;
+`
 const StyledLink = styled(Link)`
   font-size: 18px;
   width: 100px;
@@ -15,14 +15,14 @@ const StyledLink = styled(Link)`
   justify-content: center;
   align-items: center;
   background-color: #eee;
-`;
+`
 const StyledButton = styled.div`
 &:hover {
 	cursor: pointer;
 }
-}`;
+`
 const ControlPanelContainer = ({ className }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <div className={className}>
       <RightAligned>
@@ -40,7 +40,7 @@ const ControlPanelContainer = ({ className }) => {
         </Link>
       </RightAligned>
     </div>
-  );
-};
+  )
+}
 
-export const ControlPanel = styled(ControlPanelContainer)``;
+export const ControlPanel = styled(ControlPanelContainer)``

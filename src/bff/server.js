@@ -1,6 +1,5 @@
 import { getUser } from './get-user'
 import { addUser } from './add-user'
-import { session } from './session'
 import { createSession } from 'react-router'
 export const server = {
 	async authorize(authLogin, authPassword) {
