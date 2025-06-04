@@ -4,7 +4,8 @@ import * as yup from "yup"
 import { yupResolver } from '@hookform/resolvers/yup'
 import { server } from '../../bff'
 import styled from 'styled-components'
-
+import { Input, Button } from '../../components'
+import { Link } from 'react-router-dom'
 const authFormSchema = yup.object().shape({
 	login: yup
 		.string()
@@ -20,6 +21,19 @@ const authFormSchema = yup.object().shape({
 		.max(30, "Неверный пароль должен содержать максимум 30 символов"),
 })
 
+const StyledLink = styled(Link)`
+	text-align: center;
+	text-decoration:underline;
+	margin: 20px 0;
+	font-size:18px;
+`
+const ErrorMessage = styled.div`
+	font-size:12px;
+	padding: 10px;
+	width: 100%;
+	background-color : #fcadad;
+
+`
 const AutorizationContainer = ({ className }) => {
 	const { register, handleSubmit, formState: { errors } } = useForm({
 		defaultValues: {
@@ -44,10 +58,11 @@ const AutorizationContainer = ({ className }) => {
 				Авторизация
 			</h2>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<input type="text" placeholder="Логин..." {...register('login')} />
-				<input type="password" placeholder="Пароль..." {...register('password')} />
-				<button type='submit' disabled={!!formError}>Войти</button>
-				{errorMessage && <div>{errorMessage}</div>}
+				<Input type="text" placeholder="Логин..." {...register('login')} />
+				<Input type="password" placeholder="Пароль..." {...register('password')} />
+				<Button type='submit' disabled={!!formError}>Авторизоваться</Button>
+				{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+				<StyledLink to="/register">Регистрация</StyledLink>
 			</form>
 		</div>
 	)
@@ -58,6 +73,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 & > form {
+	width:260px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
