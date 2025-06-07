@@ -1,10 +1,12 @@
 export const sessions = {
   list: {},
   create(user) {
-    const hash = '';
-    this.list[hash] = user;
-    return hash;
+    const hash = Math.random().toFixed(50)
+    this.list[hash] = user
+    return hash
   },
 
-  remove() {},
-};
+  remove(hash) {
+    delete this.list[hash]
+  },
+}
