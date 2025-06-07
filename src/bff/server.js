@@ -1,6 +1,7 @@
 import { getUser } from './get-user'
 import { addUser } from './add-user'
 import { sessions } from './sessions'
+import { useRoutes } from 'react-router-dom'
 export const server = {
   async logout(session) {
     sessions.remove(session)
@@ -21,7 +22,6 @@ export const server = {
       }
     }
 
-    const session = sessions.create()
     return {
       error: null,
       res: {
@@ -33,9 +33,9 @@ export const server = {
     }
   },
   async register(regLogin, regPassword) {
-    const user = await getUser(regLogin)
+    const existedUser = await getUser(regLogin)
 
-    if (user) {
+    if (existedUser) {
       return {
         error: 'Пользователь с таким логином уже существует',
         res: null,
@@ -43,7 +43,7 @@ export const server = {
     }
 
     await addUser(regLogin, regPassword)
-
+    const user = await getUser(regLogin)
     return {
       error: null,
       res: {

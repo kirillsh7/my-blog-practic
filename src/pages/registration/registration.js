@@ -7,11 +7,11 @@ import { server } from '../../bff'
 import styled from 'styled-components'
 import { Input, Button, H2, AuthFormError } from '../../components'
 import { useResetForm } from '../../hooks'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { setUser } from '../../actions'
 import { selectUserRole } from '../../selectors'
 import { ROLE } from '../../constants'
-const authFormSchema = yup.object().shape({
+const regFormSchema = yup.object().shape({
 	login: yup
 		.string()
 		.required('Заполните логин')
@@ -27,15 +27,15 @@ const authFormSchema = yup.object().shape({
 		)
 		.min(6, 'Неверный пароль должен быть больше 6 символов')
 		.max(30, 'Неверный пароль должен содержать максимум 30 символов'),
+	passcheck: yup
+		.string()
+		.required('Подтвердите пароль')
+		.oneOf([yup.ref('password'), null], 'Пароли не совпадают'),
 })
 
-const StyledLink = styled(Link)`
-  text-align: center;
-  text-decoration: underline;
-  margin: 20px 0;
-  font-size: 18px;
-`
-const AutorizationContainer = ({ className }) => {
+
+
+const RegistrationContainer = ({ className }) => {
 	const {
 		register,
 		handleSubmit,
@@ -45,30 +45,31 @@ const AutorizationContainer = ({ className }) => {
 		defaultValues: {
 			login: '',
 			password: '',
+			passcheck: '',
 		},
-		resolver: yupResolver(authFormSchema),
+		resolver: yupResolver(regFormSchema),
 	})
 	const [serverError, setServerError] = useState()
 	const dispatch = useDispatch()
 	const roleId = useSelector(selectUserRole)
 	useResetForm(reset)
 	const onSubmit = ({ login, password }) => {
-		server.authorize(login, password).then(({ error, res }) => {
+		server.register(login, password).then(({ error, res }) => {
 			if (error) {
-				setServerError(`Ошибка запроса:${error}`)
+				setServerError(`Ошибка запроса:${error} `)
 				return
 			}
 			dispatch(setUser(res))
 		})
 	}
-	const formError = errors.login?.message || errors?.password?.message
+	const formError = errors.login?.message || errors?.password?.message || errors?.passcheck?.message
 	const errorMessage = formError || serverError
 	if (roleId !== ROLE.GUEST) {
 		return <Navigate to="/" />
 	}
 	return (
 		<div className={className}>
-			<H2>Авторизация</H2>
+			<H2>Регистрация</H2>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Input
 					type="text"
@@ -80,17 +81,21 @@ const AutorizationContainer = ({ className }) => {
 					placeholder="Пароль..."
 					{...register('password', { onChange: () => setServerError(null) })}
 				/>
+				<Input
+					type="password"
+					placeholder="Подтвердите пароль..."
+					{...register('passcheck', { onChange: () => setServerError(null) })}
+				/>
 				<Button type="submit" disabled={!!formError}>
-					Авторизоваться
+					Зарегистрироваться
 				</Button>
 				{errorMessage && <AuthFormError>{errorMessage}</AuthFormError>}
-				<StyledLink to="/register">Регистрация</StyledLink>
 			</form>
 		</div>
 	)
 }
 
-export const Autorization = styled(AutorizationContainer)`
+export const Registration = styled(RegistrationContainer)`
   display: flex;
   flex-direction: column;
   align-items: center;
