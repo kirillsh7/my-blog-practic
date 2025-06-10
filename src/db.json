@@ -6,30 +6,23 @@
       "password": "rewq123",
       "registered_at": "2022-01-01",
       "role_id": 0
-    },
-    {
-      "id": "c4d1",
-      "login": "fungood659",
-      "password": "qwer123",
-      "registered_at": "2058-06-09 10:55",
-      "role_id": 2
     }
   ],
   "roles": [
     {
-      "id": "0",
+      "id": 0,
       "name": "Администратор"
     },
     {
-      "id": "1",
+      "id": 1,
       "name": "Модератор"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Читатель"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Гость"
     }
   ],
