@@ -29,11 +29,11 @@ const UserRowContainer = ({ className, id, login, registeredAt, roleId: userRole
 							<option key={roleId} value={roleId}>{roleName}
 							</option>)}
 					</select>
-					<Icon id='fa-save' margin='0 0 0 10px' disabled={isSaveButtonDisabled} onClick={() => onRoleSave(id, selectedRoleId)} />
+					<Icon isButton id='fa-save' margin='0 0 0 10px' disabled={isSaveButtonDisabled} onClick={() => onRoleSave(id, selectedRoleId)} />
 
 				</div>
 			</TableRow>
-			<Icon id='fa-trash-o' margin='0 0 0 10px' onClick={onUserRemove} />
+			<Icon id='fa-trash-o' margin='0 0 0 10px' isButton onClick={onUserRemove} />
 
 		</div>
 

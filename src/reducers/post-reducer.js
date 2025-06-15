@@ -1,6 +1,6 @@
 import { ACTION_TYPE } from '../actions'
 
-const InitialPostState = {
+export const InitialPostState = {
   id: '',
   title: '',
   imageUrl: '',
@@ -16,6 +16,9 @@ export const postReducer = (state = InitialPostState, action) => {
         ...state,
         ...action.payload,
       }
+    }
+    case ACTION_TYPE.RESET_POST_DATA: {
+      return InitialPostState
     }
     default: {
       return state

@@ -1,2 +1,3 @@
 export * from './comments/comments'
-export * from './PostContent/PostContent'
+export * from './post-content/post-content'
+export * from './post-form/post-form'

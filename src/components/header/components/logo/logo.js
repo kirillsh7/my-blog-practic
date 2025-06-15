@@ -13,7 +13,7 @@ const SmallText = styled.div`
 `
 const LogoContainer = ({ className }) => (
   <Link to="/" className={className}>
-    <Icon size="70px" margin="-10px 10px 0 0" id="fa-code" />
+    <Icon size="70px" margin="-10px 10px 0 0" id="fa-code" isButton />
     <div>
       <LargeText>Блог</LargeText>
       <SmallText>веб-разрабтчика</SmallText>

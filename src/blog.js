@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Header, Footer } from './components/index'
+import { Header, Footer, Modal } from './components'
 import { Route, Routes } from 'react-router-dom'
 import { Autorization, Post, Registration, Users } from './pages'
 import { useLayoutEffect } from 'react'
@@ -42,12 +42,14 @@ function Blog() {
           <Route path="/login" element={<Autorization />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/post" element={<h1>Новая статья</h1>} />
+          <Route path="/post" element={<Post />} />
           <Route path="/post/:postId" element={<Post />} />
+          <Route path="/post/:postId/edit" element={<Post />} />
           <Route path="*" element={<h1>404</h1>} />
         </Routes>
       </Page>
       <Footer />
+      <Modal />
     </AppColumn>
   )
 }

@@ -2,13 +2,20 @@ import styled from 'styled-components'
 import { Icon } from '../../../../../../components'
 import { useDispatch } from 'react-redux'
 import { useServerRequest } from '../../../../../../hooks'
-import { removeCommentAsync } from '../../../../../../actions'
+import { removeCommentAsync, openModal, closeModal } from '../../../../../../actions'
 
 const CommentContainer = ({ className, id, author, content, postId, publishedAt }) => {
 	const dispatch = useDispatch()
 	const requestServer = useServerRequest()
 	const onCommentRemove = () => {
-		dispatch(removeCommentAsync(requestServer, postId, id))
+		dispatch(openModal({
+			text: 'Вы действительно хотите удалить комментарий?',
+			onCancel: () => dispatch(closeModal),
+			onConfirm: () => {
+				dispatch(removeCommentAsync(requestServer, postId, id))
+				dispatch(closeModal)
+			}
+		}))
 	}
 	return (
 		<div className={className}>
@@ -25,7 +32,8 @@ const CommentContainer = ({ className, id, author, content, postId, publishedAt 
 				</div>
 				<div className='comment-text'>{content}</div>
 			</div>
-			<Icon id='fa-trash-o' margin='5px 5px 0 10px' size='18px' onClick={onCommentRemove} />
+			<Icon id='fa-trash-o' margin='5px 5px 0 10px' size='18px' isButton onClick={onCommentRemove} />
+
 		</div>)
 }
 export const Comment = styled(CommentContainer)`

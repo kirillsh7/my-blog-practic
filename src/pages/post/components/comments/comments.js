@@ -21,10 +21,10 @@ const CommentsContainer = ({ className, comments, postId }) => {
 
 			<div className='new-comment'>
 				<textarea name="comment" placeholder='Комментарий...' value={newComment} onChange={({ target }) => setNewComment(target.value)} > </textarea>
-				<Icon id='fa-paper-plane-o' margin='0 0 0 10px' size='20px' onClick={onNewCommentAdd} />
+				<Icon id='fa-paper-plane-o' margin='0 0 0 10px' size='20px' isButton onClick={onNewCommentAdd} />
 			</div>
 			<div className="comments">
-				{comments.map(({ id, author, content, publishedAt }) => <Comment
+				{comments.filter(comment => comment.postId === postId).map(({ id, author, content, publishedAt }) => <Comment
 					key={id}
 					id={id}
 					author={author}
