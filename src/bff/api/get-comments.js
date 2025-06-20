@@ -1,5 +1,6 @@
 import { transformComment } from '../transformers'
 
-export const getComments = (postId) =>
-	fetch(`http://localhost:3005/comments?_id=${postId}`)
-		.then((loadedComments) => loadedComments.json().then((loadedComments) => loadedComments.map(transformComment)))
+export const getComments = (postId) => {
+	const url = postId === undefined ? 'http://localhost:3005/comments' : `http://localhost:3005/comments?_id=${postId}`
+	return fetch(url).then((loadedComments) => loadedComments.json().then((loadedComments) => loadedComments.map(transformComment)))
+}
