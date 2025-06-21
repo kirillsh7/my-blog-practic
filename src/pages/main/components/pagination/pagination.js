@@ -1,15 +1,15 @@
 import styled from 'styled-components'
 import { Button } from '../../../../components'
 
-const PaginationContainer = ({ className, page, setPageHandler, paginationData }) => {
+const PaginationContainer = ({ className, page, onPage, paginationData }) => {
 	const { first, prev, next, last } = paginationData
 	return (
 		<div className={className}>
-			<Button disabled={page === 1} onClick={setPageHandler.bind(null, first)}>В начало</Button>
-			<Button disabled={page === 1} onClick={setPageHandler.bind(null, prev)}>Предыдущая</Button>
+			<Button disabled={page === 1} onClick={onPage.bind(null, first)}>В начало</Button>
+			<Button disabled={page === 1} onClick={onPage.bind(null, prev)}>Предыдущая</Button>
 			<div className='current-page' >Страница: {page}</div>
-			<Button disabled={page === last} onClick={setPageHandler.bind(null, next)}>Следущая</Button>
-			<Button disabled={page === last} onClick={setPageHandler.bind(null, last)}>В конец</Button>
+			<Button disabled={page === last} onClick={onPage.bind(null, next)}>Следущая</Button>
+			<Button disabled={page === last} onClick={onPage.bind(null, last)}>В конец</Button>
 		</div>
 	)
 }

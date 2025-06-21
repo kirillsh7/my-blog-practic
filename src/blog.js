@@ -15,8 +15,10 @@ min-height: 100%;
 background-color: #fff;
 margin: 0 auto;
 `
-const Page = styled.div`
-padding: 120px 0 0 20px;
+const Page = styled.main`
+  padding: 120px 0 0 20px;
+  flex: 1 1 auto;
+  display: flex;
 `
 
 
