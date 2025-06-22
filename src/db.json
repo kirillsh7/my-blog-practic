@@ -13,6 +13,13 @@
       "password": "rewq123",
       "registered_at": "2022-01-01",
       "role_id": 1
+    },
+    {
+      "id": "4961",
+      "login": "fungood659",
+      "password": "qwer123",
+      "registered_at": "2042-11-07 16:44",
+      "role_id": 2
     }
   ],
   "roles": [
@@ -197,13 +204,6 @@
   ],
   "comments": [
     {
-      "id": "29c8",
-      "authhor_id": "001",
-      "post_id": "001",
-      "published_at": "2063-01-15 12:50",
-      "content": "ddd"
-    },
-    {
       "id": "8e71",
       "authhor_id": "001",
       "post_id": "001",
@@ -223,6 +223,13 @@
       "post_id": "002",
       "published_at": "2040-01-16 17:03",
       "content": "dd"
+    },
+    {
+      "id": "17b6",
+      "authhor_id": "4961",
+      "post_id": "001",
+      "published_at": "2046-04-26 04:50",
+      "content": "dddd"
     }
   ],
   "sessions": [
@@ -262,6 +269,17 @@
     {
       "id": "be5d",
       "hash": "0.38183486739152250333262372805620543658733367919922",
+      "user": {
+        "id": "001",
+        "login": "admin",
+        "password": "rewq123",
+        "registeredAt": "2022-01-01",
+        "roleId": 0
+      }
+    },
+    {
+      "id": "e1df",
+      "hash": "0.76548721625857329975417542300419881939888000488281",
       "user": {
         "id": "001",
         "login": "admin",

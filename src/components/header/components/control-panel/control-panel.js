@@ -5,22 +5,12 @@ import { Button, Icon } from '../../../../components'
 import { ROLE } from '../../../../constants'
 import { selectUserRole, selectUserLogin, selectUserSession } from '../../../../selectors'
 import { logout } from '../../../../actions'
+import { checkAccess } from '../../../../utils'
 
 const RightAligned = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-`
-const StyledLink = styled(Link)`
-  font-size: 18px;
-  width: 100px;
-  height: 32px;
-  border: 1px solid #000;
-  border-radius: 5px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #eee;
 `
 
 const UserName = styled.div`
@@ -38,6 +28,9 @@ const ControlPanelContainer = ({ className }) => {
     dispatch(logout(session))
     sessionStorage.removeItem('userData')
   }
+
+  const isAdmin = checkAccess([ROLE.ADMIN], roleId)
+
   return (
     <div className={className}>
       <RightAligned> {roleId === ROLE.GUEST ?
@@ -52,12 +45,15 @@ const ControlPanelContainer = ({ className }) => {
       </RightAligned>
       <RightAligned>
         <Icon size="24px" id="fa-backward" margin="10px 0 0 0" isButton onClick={() => navigate(-1)} />
-        <Link to="/post">
-          <Icon size="20px" id="fa-file-text-o" margin="10px 0 0 16px" isButton />
-        </Link>
-        <Link to="/users">
-          <Icon size="20px" id="fa-users" margin="10px 0 0 16px" isButton />
-        </Link>
+        {isAdmin && <>
+          <Link to="/post">
+            <Icon size="20px" id="fa-file-text-o" margin="10px 0 0 16px" isButton />
+          </Link>
+          <Link to="/users">
+            <Icon size="20px" id="fa-users" margin="10px 0 0 16px" isButton />
+          </Link>
+        </>
+        }
       </RightAligned>
     </div>
   )

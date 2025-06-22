@@ -16,11 +16,11 @@ const PaginationContainer = ({ className, page, onPage, paginationData }) => {
 export const Pagination = styled(PaginationContainer)`
 display: flex;
 justify-content: center;
-margin: 0 0 20px;
+margin: 0 35px 20px 5px;
 padding: 0 20px;
 & .current-page{
 	border: 1px solid #000;
-	width: 110px;
+	min-width: 140px;
 	text-align: center;
 	padding: 0 5px;
 	margin: 0 10px;
@@ -29,6 +29,5 @@ padding: 0 20px;
 & button{
 	margin: 0 10px;
 	height: max-content;
-	width: max-content;
 	padding: 4px 5px;
 }`

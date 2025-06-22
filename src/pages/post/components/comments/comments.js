@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { Icon } from '../../../../components'
 import { Comment } from './components'
-import { selectUserId } from '../../../../selectors'
+import { selectUserId, selectUserRole } from '../../../../selectors'
 import { useServerRequest } from '../../../../hooks'
 import { addCommentAsync } from '../../../../actions'
+import { ROLE } from '../../../../constants'
 
 const CommentsContainer = ({ className, comments, postId }) => {
 	const [newComment, setNewComment] = useState('')
@@ -16,26 +17,33 @@ const CommentsContainer = ({ className, comments, postId }) => {
 		dispatch(addCommentAsync(requestServer, userId, postId, newComment))
 		setNewComment('')
 	}
+	const userRole = useSelector(selectUserRole)
+	const isGuest = ROLE.GUEST === userRole
 	return (
 		<div className={className} >
-
-			<div className='new-comment'>
-				<textarea name="comment" placeholder='Комментарий...' value={newComment} onChange={({ target }) => setNewComment(target.value)} > </textarea>
-				<Icon id='fa-paper-plane-o' margin='0 0 0 10px' size='20px' isButton onClick={onNewCommentAdd} />
-			</div>
+			{!isGuest
+				&& <div className='new-comment'>
+					<textarea name="comment" placeholder='Комментарий...' value={newComment} onChange={({ target }) => setNewComment(target.value)} > </textarea>
+					<Icon id='fa-paper-plane-o' margin='0 0 0 10px' size='20px' isButton onClick={onNewCommentAdd} />
+				</div>
+			}
 			<div className="comments">
-				{comments.filter(comment => comment.postId === postId).map(({ id, author, content, publishedAt }) => <Comment
-					key={id}
-					id={id}
-					author={author}
-					content={content}
-					publishedAt={publishedAt}
-					postId={postId}
+				{comments.length === 0
+					? <div style={{ marginTop: '20px' }} >
+						Коментариев под этим постом нет
+					</div>
+					: comments.map(({ id, author, content, publishedAt }) => <Comment
+						key={id}
+						id={id}
+						author={author}
+						content={content}
+						publishedAt={publishedAt}
+						postId={postId}
 
-				/>)
+					/>)
 				}
 			</div>
-		</div>
+		</div >
 	)
 }
 export const Comments = styled(CommentsContainer)`

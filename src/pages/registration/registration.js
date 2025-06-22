@@ -98,6 +98,7 @@ const RegistrationContainer = ({ className }) => {
 
 export const Registration = styled(RegistrationContainer)`
   display: flex;
+	flex-grow: 1;
   flex-direction: column;
   align-items: center;
   & > form {
