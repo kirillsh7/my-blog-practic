@@ -15,7 +15,6 @@ const UsersContainer = ({ className }) => {
 	const [shouldUpdateList, setShouldUpdateList] = useState(false)
 
 	const requestServer = useServerRequest()
-
 	useEffect(() => {
 		if (!checkAccess([ROLE.ADMIN], userRole)) return
 

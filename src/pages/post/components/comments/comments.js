@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,7 +7,7 @@ import { Comment } from './components'
 import { selectUserId, selectUserRole } from '../../../../selectors'
 import { useServerRequest } from '../../../../hooks'
 import { addCommentAsync } from '../../../../actions'
-import { ROLE } from '../../../../constants'
+import { PROP_TYPE, ROLE } from '../../../../constants'
 
 const CommentsContainer = ({ className, comments, postId }) => {
 	const [newComment, setNewComment] = useState('')
@@ -29,7 +30,7 @@ const CommentsContainer = ({ className, comments, postId }) => {
 			}
 			<div className="comments">
 				{comments.length === 0
-					? <div style={{ marginTop: '20px' }} >
+					? <div style={{ borderTop: '1px solid #000', width: 'max-content', padding: '5px 5px 0  5px', alignItems: 'center', margin: '20px auto' }} >
 						Коментариев под этим постом нет
 					</div>
 					: comments.map(({ id, author, content, publishedAt }) => <Comment
@@ -63,3 +64,8 @@ export const Comments = styled(CommentsContainer)`
 		font-size: 18px;
 	}
 `
+
+Comments.propTypes = {
+	comments: PropTypes.arrayOf(PROP_TYPE.COMMENT).isRequired,
+	postId: PropTypes.string.isRequired
+}

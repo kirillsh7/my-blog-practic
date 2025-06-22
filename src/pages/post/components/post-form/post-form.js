@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { savePostAsync } from '../../../../actions'
 import { useServerRequest } from '../../../../hooks'
 import { useNavigate } from 'react-router-dom'
+import { PROP_TYPE } from '../../../../constants'
 
 const PostFormContainer = ({ className, post: { id, title, imageUrl, content, publishedAt } }) => {
 	const [imageUrlValue, setImageUrlValue] = useState(imageUrl)
@@ -64,3 +65,6 @@ export const PostForm = styled(PostFormContainer)`
 	
 	
 `
+PostForm.propTypes = {
+	post: PROP_TYPE.POST
+}

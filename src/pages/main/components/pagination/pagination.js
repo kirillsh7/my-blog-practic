@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Button } from '../../../../components'
+import { PROP_TYPE } from '../../../../constants'
 
 const PaginationContainer = ({ className, page, onPage, paginationData }) => {
 	const { first, prev, next, last } = paginationData
@@ -31,3 +33,9 @@ padding: 0 20px;
 	height: max-content;
 	padding: 4px 5px;
 }`
+
+Pagination.propTypes = {
+	page: PropTypes.number.isRequired,
+	onPage: PropTypes.func.isRequired,
+	paginationData: PROP_TYPE.PAGINATION_DATA.isRequired
+}
