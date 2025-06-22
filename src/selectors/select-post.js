@@ -1,1 +1,1 @@
-export const selectPost = ({ post }) => post
+export const selectPost = ({ post }) => post.res

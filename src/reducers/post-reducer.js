@@ -1,12 +1,15 @@
 import { ACTION_TYPE } from '../actions'
 
 export const InitialPostState = {
-  id: '',
-  title: '',
-  imageUrl: '',
-  content: '',
-  publishedAt: '',
-  comments: [],
+  res: {
+    id: '',
+    title: '',
+    imageUrl: '',
+    content: '',
+    publishedAt: '',
+    comments: [],
+  },
+  error: null
 }
 
 export const postReducer = (state = InitialPostState, action) => {
@@ -14,11 +17,23 @@ export const postReducer = (state = InitialPostState, action) => {
     case ACTION_TYPE.SET_POST_DATA: {
       return {
         ...state,
-        ...action.payload,
+        res: { ...action.payload },
       }
     }
     case ACTION_TYPE.RESET_POST_DATA: {
       return InitialPostState
+    }
+    case ACTION_TYPE.SET_ERROR_POST: {
+      return {
+        ...state,
+        error: action.payload,
+      }
+    }
+    case ACTION_TYPE.RESET_POST_DATA: {
+      return {
+        ...state,
+        error: null
+      }
     }
     default: {
       return state

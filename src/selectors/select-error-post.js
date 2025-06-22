@@ -1,0 +1,1 @@
+export const selectErrorPost = ({ post }) => post.error
