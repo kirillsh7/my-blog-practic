@@ -1,1 +1,0 @@
-export const remodeComment = () => console.log('remove comment')

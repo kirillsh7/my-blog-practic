@@ -1,6 +1,11 @@
 import styled from 'styled-components'
-import { Header, Footer } from './components/index'
+import { Header, Footer, Modal, Error } from './components'
 import { Route, Routes } from 'react-router-dom'
+import { Autorization, Post, Registration, Users, Main } from './pages'
+import { useLayoutEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setUser } from './actions'
+import { ERROR } from './constants'
 
 const AppColumn = styled.div`
 display: flex;
@@ -11,32 +16,43 @@ min-height: 100%;
 background-color: #fff;
 margin: 0 auto;
 `
-const Content = styled.div`
-padding: 120px 0;
+const Page = styled.main`
+  padding: 120px 0 0 20px;
+  flex: 1 1 auto;
+  display: flex;
 `
-const H2 = styled.h2`
-text-align: center
-`
-
 
 
 function Blog() {
+  const dispatch = useDispatch()
+  useLayoutEffect(() => {
+    const currentUserDataJSON = sessionStorage.getItem('userData')
+    if (!currentUserDataJSON) return
+
+    const currentUserData = JSON.parse(currentUserDataJSON)
+    dispatch(setUser(
+      {
+        ...currentUserData,
+        roleId: Number(currentUserData.roleId)
+      }))
+  }, [dispatch])
   return (
     <AppColumn>
       <Header />
-      <Content>
-        <H2>Контент страницы</H2>
+      <Page>
         <Routes>
-          <Route path="/" element={<h1>Главная</h1>} />
-          <Route path="/login" element={<h1>Авторизация</h1>} />
-          <Route path="/register" element={<h1>Регистрация</h1>} />
-          <Route path="/users" element={<h1>Пользователи</h1>} />
-          <Route path="/post" element={<h1>Новая статья</h1>} />
-          <Route path="/post/:postId" element={<h1>Статья</h1>} />
-          <Route path="*" element={<h1>404</h1>} />
+          <Route path="/" element={<Main />} />
+          <Route path="/login" element={<Autorization />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/post" element={<Post />} />
+          <Route path="/post/:postId" element={<Post />} />
+          <Route path="/post/:postId/edit" element={<Post />} />
+          <Route path="*" element={<Error error={ERROR.PAGE_NOT_EXIST} />} />
         </Routes>
-      </Content>
+      </Page>
       <Footer />
+      <Modal />
     </AppColumn>
   )
 }

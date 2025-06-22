@@ -1,1 +1,2 @@
-export * from './bff'
+import * as server from './operations'
+export { server }
