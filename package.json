@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-check-prop-types": "^1.1.0",
     "prettier": "3.5.3"
   }
 }
